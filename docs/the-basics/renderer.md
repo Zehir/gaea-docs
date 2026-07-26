@@ -4,7 +4,7 @@ weight: 61
 
 # GaeaRenderer
 
-`GaeaRenderer` takes the `GaeaGrid` produced by a `GaeaGenerator` and draws it into your scene.
+`GaeaRenderer` takes the `GaeaResult` produced by a `GaeaGenerator` and draws it into your scene.
 
 This is an abstract base class. On its own, it does not render anything, but it defines the common behavior used by all renderer implementations.
 
@@ -90,7 +90,7 @@ To create your own renderer, extend `GaeaRenderer` class and implement the three
 class_name MyRenderer
 extends GaeaRenderer
 
-func _render(grid: GaeaGrid) -> void:
+func _render(grid: GaeaResult) -> void:
 	pass
 
 func _erase_area(area: AABB) -> void:

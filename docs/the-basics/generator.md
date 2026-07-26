@@ -4,7 +4,7 @@ weight: 60
 
 # GaeaGenerator
 
-`GaeaGenerator` is the node that executes your graph and produces a `GaeaGrid` that renderers can display in-game. A grid can have multiple layers, and each cell in the grid contains a `GaeaMaterial` that tells renderers what to draw.
+`GaeaGenerator` is the node that executes your graph and produces a `GaeaResult` that renderers can display in-game. A grid can have multiple layers, and each cell in the grid contains a `GaeaMaterial` that tells renderers what to draw.
 
 It needs 3 resources to run:
 
@@ -35,7 +35,7 @@ Adding the `GaeaGenerator` to your scene tree and selecting it will open the gra
 
 A graph can have multiple layers, which helps you split generation into clear responsibilities. This is especially practical for tile-based workflows: one layer for base terrain, one for props, one for enemies, and so on.
 
-During generation, `GaeaGenerator` processes all enabled layers and combines them into a single `GaeaGrid` that renderers can display.
+During generation, `GaeaGenerator` processes all enabled layers and combines them into a single `GaeaResult` that renderers can display.
 
 !!! info
     For better readability in the graph, give each layer a meaningful name with `resource_name`. Each layer appears as an output port on the output node.
@@ -126,7 +126,7 @@ Options:
 
 `GaeaGenerator` exposes multiple entry points:
 
-- `generate(origin: Variant = null)`: Start the generaton process. First resets the current generation, then generates the whole world_size. 
+- `generate(origin: Variant = null)`: Start the generaton process. First resets the current generation, then generates the whole world_size.
 - `generate_area(area: AABB, origin: Variant = null)`: generates only a specific [`AABB`](https://docs.godotengine.org/en/stable/classes/class_aabb.html) region.
 - `cancel_generation()`: Cancels the current generation tasks, if any.
 - `request_reset()`: Emits `reset_requested`. Does nothing by itself, but notifies `GaeaRenderers` that they should reset the current generation.
@@ -146,7 +146,7 @@ The generator emits several signals you can connect to game logic:
 - `about_to_generate`: Emitted when the graph is about to generate.
 - `generation_started()`: Emitted when a `GaeaGenerationTask` is queued.
 - `generation_cancelled()`: Emitted when a `GaeaGenerationTask` is canceled.
-- `generation_finished(grid: GaeaGrid)`: Emitted a `GaeaGenerationTask` has finished. The generated grid is passed as an argument.
+- `generation_finished(grid: GaeaResult)`: Emitted a `GaeaGenerationTask` has finished. The generated grid is passed as an argument.
 - `reset_requested`: Emitted when this generator wants to trigger a reset.
 - `area_erased(area: AABB)`: Emitted when an area is erased.
 
